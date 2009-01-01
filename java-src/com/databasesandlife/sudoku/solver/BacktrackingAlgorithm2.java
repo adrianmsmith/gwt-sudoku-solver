@@ -54,7 +54,7 @@ public class BacktrackingAlgorithm2 extends SudokuSolver {
     @Override
     public synchronized Result solve(int board[]) {
         startTime = new Date().getTime();
-        this.board = Arrays.copyOf(board, board.length);
+        this.board = SudokuSolverUtil.copy(board);
         this.result = new Result(Result.Type.ERR_NONE);
         
         illegalValueCount = new int[9*9*16];

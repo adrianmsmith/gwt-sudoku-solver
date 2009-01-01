@@ -1,6 +1,7 @@
 package com.databasesandlife.sudoku.solver.cooperativethread;
 
 import com.databasesandlife.sudoku.solver.SudokuSolver.Result;
+import com.databasesandlife.sudoku.solver.SudokuSolverUtil;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -48,7 +49,7 @@ public class BacktrackingProcess2 extends SudokuSolverProcess {
     
     public BacktrackingProcess2(int[] board) {
         super(board);
-        this.board = Arrays.copyOf(this.board, this.board.length);
+        this.board = SudokuSolverUtil.copy(this.board);
 
         illegalValueCount = new int[9*9*16];
         Arrays.fill(illegalValueCount, 0);

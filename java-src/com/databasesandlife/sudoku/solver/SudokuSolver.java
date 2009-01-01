@@ -18,7 +18,7 @@ abstract public class SudokuSolver {
         public Type type;
         public int[] board;
         public Result(Type t)           { type=t; board=null; }
-        public Result(Type t, int[] b9) { type=t; board=Arrays.copyOf(b9, b9.length); }
+        public Result(Type t, int[] b9) { type=t; board=SudokuSolverUtil.copy(b9); }
     }
     
     abstract public Result solve(int board[]);
