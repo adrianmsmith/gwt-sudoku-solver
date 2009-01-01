@@ -17,8 +17,8 @@ abstract public class SudokuSolver {
         };
         public Type type;
         public int[] board;
-        protected Result(Type t)           { type=t; board=null; }
-        protected Result(Type t, int[] b9) { type=t; board=Arrays.copyOf(b9, b9.length); }
+        public Result(Type t)           { type=t; board=null; }
+        public Result(Type t, int[] b9) { type=t; board=Arrays.copyOf(b9, b9.length); }
     }
     
     abstract public Result solve(int board[]);

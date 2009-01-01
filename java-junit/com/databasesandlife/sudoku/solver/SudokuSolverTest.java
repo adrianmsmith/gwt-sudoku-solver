@@ -1,7 +1,8 @@
 package com.databasesandlife.sudoku.solver;
 
+import com.databasesandlife.sudoku.solver.cooperativethread.BacktrackingProcess2;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
+import java.util.Arrays;
 import junit.framework.TestCase;
 
 public class SudokuSolverTest extends TestCase {
@@ -16,20 +17,19 @@ public class SudokuSolverTest extends TestCase {
                 assertEquals("x="+x+", y="+y, expected[y*9+x], actual[y*9+x]);
     }
     
-    protected <T extends SudokuSolver> void time(int[] board, Class<T> cl) {
+    /** @return number of seconds to perform calculation */
+    protected <T extends SudokuSolver> double time(int[] board, Class<T> cl) {
         try {
-            Date start = null;
-            Date end;
+            long start = 0;
+            long end;
             int iterations = -1;
             do {
-                cl.getConstructor(int.class).newInstance(2).solve(board);
-                end = new Date();
-                if (start == null) start = new Date(); // ignore first iteration
+                cl.getConstructor(int.class).newInstance(1).solve(board);
+                end = System.nanoTime();
+                if (start == 0) start = System.nanoTime();
                 iterations ++ ;
-            } while (end.getTime() < start.getTime() + 2000);
-            System.out.println("Class " + cl.getName() + " took " +
-                    String.format("%.4f", ((double) end.getTime() - start.getTime()) / 1000 / iterations) + " seconds per iter " +
-                    "(" + iterations + " iterations)");
+            } while (end < start + 1000000000);
+            return ((double) end - start) / 1000000000 / iterations;
         }
         catch (NoSuchMethodException e) { throw new RuntimeException(e); }
         catch (InstantiationException e) { throw new RuntimeException(e); }
@@ -49,19 +49,6 @@ public class SudokuSolverTest extends TestCase {
             
             7, 0, 0,  0, 5, 0,  0, 0, 4,
             0, 0, 6,  0, 4, 0,  9, 0, 0,
-            1, 4, 0,  3, 0, 9,  0, 0, 0
-        };
-        int[] board2 = new int[] {
-            0, 0, 0,  6, 0, 4,  0, 5, 7,
-            0, 0, 7,  0, 1, 0,  8, 0, 0,
-            5, 0, 0,  0, 7, 0,  0, 0, 6,
-            
-            9, 0, 0,  0, 0, 0,  0, 2, 1, 
-            0, 0, 0,  2, 0, 3,  0, 0, 0,
-            4, 7, 0,  0, 0, 0,  0, 0, 8,
-            
-            7, 0, 0,  0, 5, 0,  0, 0, 4,
-            0, 0, 0,  0, 0, 0,  0, 0, 0,
             1, 4, 0,  3, 0, 9,  0, 0, 0
         };
         int[] result = new int[] {
@@ -86,7 +73,33 @@ public class SudokuSolverTest extends TestCase {
         assertEquals(SudokuSolver.Result.Type.UNIQUE, r2.type);
         assertEquals(result, r2.board);
         
-        time(board, BacktrackingAlgorithm.class);
-        time(board, BacktrackingAlgorithm2.class);
+        SudokuSolver.Result rp2 = new BacktrackingProcess2.SudokuSolver(2).solve(board);
+        assertEquals(SudokuSolver.Result.Type.UNIQUE, rp2.type);
+        assertEquals(result, rp2.board);
+        
+        System.out.println(String.format("%5s %10s %10s %10s", "PERC", "ALG1 SEC", "ALG2 SEC", "ALG2P SEC"));
+        for (int n = 0; n <= 9*9; n++) {
+            result[(10*n) % (9*9)] = 0;
+            if (n == 9*9) { // self check that "input" really is all zerod out at n==9*9
+                int[] zeros = new int[9*9];
+                Arrays.fill(zeros, 0);
+                assertEquals(zeros, result);
+            }
+            assertNotSame(SudokuSolver.Result.Type.ERR_TIMEOUT, new BacktrackingAlgorithm(1).solve(result).type);
+            assertNotSame(SudokuSolver.Result.Type.ERR_TIMEOUT, new BacktrackingAlgorithm2(1).solve(result).type);
+            assertNotSame(SudokuSolver.Result.Type.ERR_TIMEOUT, new BacktrackingProcess2.SudokuSolver(1).solve(result).type);
+            
+            double secAlg1  = time(result, BacktrackingAlgorithm.class);
+            double secAlg2  = time(result, BacktrackingAlgorithm2.class);
+            double secAlg2p = time(result, BacktrackingProcess2.SudokuSolver.class);
+            
+            assertTrue(secAlg1  < 0.1);
+            assertTrue(secAlg2  < 0.1);
+            assertTrue(secAlg2p < 0.1);
+            
+            System.out.println(String.format("%5d %10.6f %10.6f %10.6f", 100*(9*9-n)/(9*9), secAlg1, secAlg2, secAlg2p));
+            
+            System.gc();
+       }
     }
 }
