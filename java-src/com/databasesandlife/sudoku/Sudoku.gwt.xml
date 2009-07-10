@@ -2,7 +2,7 @@
 <module>
 	<inherits name="com.google.gwt.user.User"/>
 	<entry-point class="com.databasesandlife.sudoku.client.SudokuEntryPoint"/>
-        <source path="solver"/>
-        <source path="client"/>
+    <source path="solver"/>
+    <source path="client"/>
 	<!-- Do not define servlets here, use web.xml -->
 </module>
