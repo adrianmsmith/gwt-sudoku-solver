@@ -1,7 +1,7 @@
 - Download and install:
   - Netbeans 6.1
   - Java 6
-  - GWT 1.5
+  - GWT 1.6
   - GWT4NB
 - Create web project from existing sources
   2. Sources -> "java-src" directory
@@ -10,5 +10,8 @@
   4. Web pages -> "web"
      WEB-INF -> "web/WEB-INF"
      Test package -> "java-junit"
-- Project Properties -> Frameworks -> Add GWT
+- Project Properties
+  - Frameworks -> Add GWT
+  - relative URL -> welcomeGWT.html
 - Copy "gwt.properties" to "D:/a/GWT-Sudoku/nbproject"
+- Problems with Glassfish 3 & Vista? -> Choose Glassfish 2

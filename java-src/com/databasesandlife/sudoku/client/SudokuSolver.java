@@ -1,4 +1,4 @@
-package com.databasesandlife.sudoku.solver;
+package com.databasesandlife.sudoku.client;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -7,8 +7,22 @@ import java.util.Vector;
 /**
  * @author Adrian Smith &lt;adrian.m.smith@gmail.com&gt;
  */
-public class BacktrackingAlgorithm extends SudokuSolver {
+public class SudokuSolver {
     
+    public static final class Result {
+        public enum Type {
+                                        ERR_TIMEOUT,
+                 /** No result found */ ERR_NONE,
+          /** Multiple results found */ WARN_MULTIPLE,
+                /** One result found */ UNIQUE
+
+        };
+        public Type type;
+        public int[] board;
+        public Result(Type t)           { type=t; board=null; }
+        public Result(Type t, int[] b9) { type=t; board=copy(b9); }
+    }
+
     protected static final class StackEntry {
         public final int offset9;
         public final int offset16;
@@ -17,16 +31,23 @@ public class BacktrackingAlgorithm extends SudokuSolver {
         public StackEntry(int o9) { offset9 = o9; y = offset9 / 9; x = offset9 % 9; offset16 = y*16 + x; }
     }
     
-    protected long maxMillis;
+    protected long maxMillis = Long.MAX_VALUE;
     protected long startTime;
     protected int[] board16 = new int[9 * 16];
     protected StackEntry[] stack;
     protected Result result;
     
-    public BacktrackingAlgorithm(int maxSeconds) {
-        maxMillis = maxSeconds * 1000;
+    public SudokuSolver setTimeoutInMilliseconds(long maxMillis) {
+        this.maxMillis = maxMillis;
+        return this;
     }
-    
+
+    public static int[] copy(int[] in) {
+        int[] result = new int[in.length];
+        for (int i = 0; i < in.length; i++) result[i] = in[i];
+        return result;
+    }
+
     protected void prepareStack() {
         Vector<StackEntry> stackVector = new Vector<StackEntry>(board16.length);
         for (int y = 0; y < 9; y++)
@@ -46,12 +67,7 @@ public class BacktrackingAlgorithm extends SudokuSolver {
         return board9;
     }
             
-    /** @param board 0 = unknown, 1..9 = value */
-    @Override 
     public synchronized Result solve(int[] board9) {
-//        assert 1 == 2;
-//        if (true) throw new RuntimeException("assert doesn't work");
-        
         assert board9.length == 9*9;
         
         result = new Result(Result.Type.ERR_NONE);
