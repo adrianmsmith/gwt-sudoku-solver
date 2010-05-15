@@ -16,3 +16,23 @@ To set up the IDE:
   - relative URL -> index.html
 - Copy "gwt.properties" to "D:/a/GWT-Sudoku/nbproject"
 - Problems with Glassfish 3 & Vista? -> Choose Glassfish 2
+
+
+
+To install to blog:
+==================
+
+- GWT htdocs:
+  - Build using netbeans
+  - Copy "com.databasesandlife.sudoku.Sudoku" dir (contains x.cache etc.)
+  - Into "blog-attachments" dir
+  - Upload to easyname server
+
+- source:
+  - Make a dir with: 
+    - "java-src" (without svn)
+    - COPYING
+    - README
+  - Make "databasesandlife-sudoku-solver-source.zip"
+  - Into "blog-attachments/yyymmdd-com.database..." dir
+  - Upload to easyname server
