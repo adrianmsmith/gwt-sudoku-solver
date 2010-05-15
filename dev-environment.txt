@@ -1,17 +1,18 @@
+To set up the IDE:
+=================
+
 - Download and install:
-  - Netbeans 6.1
-  - Java 6
-  - GWT 1.6
+  - Netbeans 6.1 or later
+  - Java 6 or later
+  - GWT 1.6 or later
   - GWT4NB
-- Create web project from existing sources
-  2. Sources -> "java-src" directory
-  3. Glassfish & Java EE5
-     Context path /sudoku2
-  4. Web pages -> "web"
-     WEB-INF -> "web/WEB-INF"
-     Test package -> "java-junit"
+- In Netbeans: File -> New Project -> Web with existing sources
+  - Sources -> "java-src" directory
+  - Web -> "web" directory
+  - WEB-INF -> "web/WEB-INF" directory
+  - Test package -> "java-junit"
 - Project Properties
   - Frameworks -> Add GWT
-  - relative URL -> welcomeGWT.html
+  - relative URL -> index.html
 - Copy "gwt.properties" to "D:/a/GWT-Sudoku/nbproject"
 - Problems with Glassfish 3 & Vista? -> Choose Glassfish 2

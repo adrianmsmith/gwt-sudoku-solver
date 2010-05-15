@@ -46,7 +46,7 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
 
 <style>
  div#sudokucontainer { height:430px; vertical-align:middle; display:table-cell; text-align:center; }
- table.sudoku { margin-left: 133px; empty-cells: show; border-collapse: collapse; }
+ table.sudoku { empty-cells: show; border-collapse: collapse; }
  table.sudoku div { font-size: 10pt }
  tr.sudokurow td { text-align:center; border: 1px solid #CCC; }
  tr.sudokurow td.leftcol { border-left: 3px solid black;  }
@@ -58,41 +58,43 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
  tr.sudokurow span.result { color: #AAA; }
  tr.sudokurow span.result,
  tr.sudokurow span.userentered,
- tr.sudokurow input[type=text] { font-size: 19pt; font-family: helvetica }
- tr.sudokurow input[type=text] { width: 20px; padding-left:2px; border:0; }
+ tr.sudokurow input.number { font-size: 19pt; font-family: helvetica }
+ tr.sudokurow input.number { width: 20px; padding-left:2px; border:0; }
 
  table.sudoku td.submitinfo {  }
  table.sudoku td.submit { height:30px; text-align:right }
  table.sudoku td.statusrow { height:30px; text-align:center; vertical-align:top }
+ table.sudoku td.statusrow .message { padding-left: 5px; }
 
  td.statusrow .error,
  td.statusrow .success {
-    padding-left: 25px;
-    padding-right: 10px;
-    background-repeat:no-repeat;
-    background-position: 3px 50%;
+    padding-left: 7px;
+    padding-right: 7px;
+    display: inline;
     overflow: hidden;
-    border: solid 1px white;
+/*    border: solid 1px white; */
  }
 
  td.statusrow .error {
     color: #800;
     background-color: #FCC;
-    background-image:url('http://www.databasesandlife.com/t/sunrise-error-icon.png');
     border: solid 1px red ;
  }
 
  td.statusrow .success {
     color: #080;
     background-color: #EFE;
-    background-image:url('http://www.databasesandlife.com/t/sunrise-success-icon.png');
     border: solid 1px green ;
  }
 
+ td
+
 </style>
 
+<table width="100%""><tr><td align="center">
  <div id="sudokucontainer">
  </div>
+</td></tr></table>
 
 
 
@@ -107,6 +109,31 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
 
 				<p>The above is a Sudoku solver I wrote in Java a while back.
 Here it is running in the browser. The Java has been converted to in-browser Javascript by Google Web Toolkit.</p>
+
+<p>Please feel free to type in the hardest Sudokus you can find anywhere, and let me know if it can solve them,
+I haven't found any it can't yet.</p>
+
+<p>I assume the in-page Javascript will not work in RSS readers, email notifications, etc.
+If that's the case, click here to get to the <a href="http://www.databasesandlife.com/sudoku">original Sudoku solver
+page</a> on my blog.
+
+<p>The algorithm works by backtracking, i.e. simply going through all squares from top-left to bottom-right,
+and finding the set of "candidate numbers" for that square (i.e. which numbers are not already used on that row, column or 3x3 block).
+The first candidate number is "applied" by placed it into the square, and the algorithm moves to the next square.
+If there is a square where the set of candidate numbers is empty (i.e. no number would work, given the candidates applied in previous squares)
+then the system returns to the previous square and tries the next candidate for that square.
+Once the system has gone "beyond" the bottom-right square, then the set of applied candidates consitutes a solution.
+However, backtracking continues, if the system reaches beyond the bottom-right square again, then the previously found solution
+was not unique, and the algorithm terminates.
+Once the system has backtracked back to the start, if a single solution was found then it is a "unique solution" (success case),
+otherwise if there are no solutions then the Sudoku is unsolvable.</p>
+
+<p>By the way, Internet Explorer really isn't that fast; I appreciate that is well-known to anyone who's ever read Google Chrome marketing
+material! But the Sudoku <a href="http://z.about.com/d/puzzles/1/0/l/e/1/sudokux103.gif">here</a> takes 708ms to solve on IE8,
+334ms on Firefox 3.6, about 100ms on Safari 4 and Opera 10, and 49ms on Chrome 4, on this 2.3GHz/core Intel Windows Vista computer.</p>
+
+
+
 
 
 				<p class="postmetadata alt">

@@ -70,12 +70,17 @@ public class SudokuSolver {
     public synchronized Result solve(int[] board9) {
         assert board9.length == 9*9;
         
+//        long now = new Date().getTime();
+
         result = new Result(Result.Type.ERR_NONE);
         startTime = new Date().getTime();
         setBoard16(board9);
         prepareStack();
         
         processNextSquare(0);
+
+//        long millis = new Date().getTime() - now;
+//        Window.alert("Took " + millis + "ms");
         
         return result;
     }

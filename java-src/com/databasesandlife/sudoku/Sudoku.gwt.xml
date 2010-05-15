@@ -5,4 +5,20 @@
     <source path="solver"/>
     <source path="client"/>
 	<!-- Do not define servlets here, use web.xml -->
+
+    <replace-with class="com.databasesandlife.sudoku.client.config.SudokuConfig">
+      <when-type-is class="com.databasesandlife.sudoku.client.config.SudokuConfig"/>
+    </replace-with>
+    <replace-with class="com.databasesandlife.sudoku.client.config.SudokuConfigFastish">
+      <when-type-is class="com.databasesandlife.sudoku.client.config.SudokuConfig" />
+      <when-property-is name="user.agent" value="gecko1_8"/>
+    </replace-with>
+    <replace-with class="com.databasesandlife.sudoku.client.config.SudokuConfigFast">
+      <when-type-is class="com.databasesandlife.sudoku.client.config.SudokuConfig" />
+      <any>
+        <when-property-is name="user.agent" value="safari"/>
+        <when-property-is name="user.agent" value="opera"/>
+      </any>
+    </replace-with>
+
 </module>

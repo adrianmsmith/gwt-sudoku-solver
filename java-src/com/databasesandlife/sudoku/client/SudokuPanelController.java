@@ -1,7 +1,10 @@
 package com.databasesandlife.sudoku.client;
 
 import com.databasesandlife.sudoku.client.SudokuSolver.Result;
+import com.databasesandlife.sudoku.client.config.SudokuConfig;
+import com.databasesandlife.sudoku.client.icons.SudokuIcons;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -10,6 +13,7 @@ import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -37,12 +41,25 @@ import com.google.gwt.user.client.ui.Widget;
  *   <li>[tr] with a [td class=links] (clear board etc. and a [td class=submit] (calc. submit button)
  * </ul>
  *
+ * <p>
+ * Glossary:
+ * <ul>
+ *   <li>"y" is the vertical coordinate in the Sudoku i.e. 0 is the highest row
+ *   <li>"row" is the vertical coordinate in the HTML table i.e. 0 is the message row, 1 is the first sudoku row, etc.
+ * </ul>
+ *
  * @author Adrian Smith
  */
 public class SudokuPanelController implements EntryPoint {
 
     enum CalculateContainerState { calculate, editAgain };
-    enum MessageType { success, error };
+
+    enum MessageType {
+        success { AbstractImagePrototype getImg() { return ((SudokuIcons) GWT.create(SudokuIcons.class)).success(); } },
+        error   { AbstractImagePrototype getImg() { return ((SudokuIcons) GWT.create(SudokuIcons.class)).error();   } };
+
+        abstract AbstractImagePrototype getImg();
+    };
 
     protected FlexTable table;
     protected int firstSudokuRow;
@@ -83,25 +100,26 @@ public class SudokuPanelController implements EntryPoint {
         return result;
     }
 
+    protected void selectCell(final int x, final int y) {
+        final TextBox newField = gridFields[x][y];
+        // if (newField.getText().length() > 0)   // the IF is an IE hack; if text field is empty then selectAll simply loses the focus
+            DeferredCommand.addCommand(new Command() {
+                public void execute() {
+                    newField.setFocus(true);
+                    newField.selectAll();
+                }
+            });
+    }
+
     protected KeyDownHandler newCellKeyDownHandler(final int x, final int y) {
         return new KeyDownHandler() {
             public void onKeyDown(KeyDownEvent event) {
-                TextBox newField = null;
                 switch (event.getNativeKeyCode()) {
-                    case KeyCodes.KEY_UP:    if (y > 0) newField = gridFields[x][y-1]; break;
-                    case KeyCodes.KEY_DOWN:  if (y < 8) newField = gridFields[x][y+1]; break;
-                    case KeyCodes.KEY_LEFT:  if (x > 0) newField = gridFields[x-1][y]; break;
-                    case KeyCodes.KEY_RIGHT: if (x < 8) newField = gridFields[x+1][y]; break;
+                    case KeyCodes.KEY_UP:    if (y > 0) selectCell(x, y-1); break;
+                    case KeyCodes.KEY_DOWN:  if (y < 8) selectCell(x, y+1); break;
+                    case KeyCodes.KEY_LEFT:  if (x > 0) selectCell(x-1, y); break;
+                    case KeyCodes.KEY_RIGHT: if (x < 8) selectCell(x+1, y); break;
                     case KeyCodes.KEY_ENTER: calculateClicked(); break;
-                }
-                if (newField != null) {
-                    newField.setFocus(true);
-                    final TextBox newField2 = newField;
-                    DeferredCommand.addCommand(new Command() {
-                        public void execute() {
-                            newField2.selectAll();
-                        }
-                    });
                 }
             }
         };
@@ -114,14 +132,7 @@ public class SudokuPanelController implements EntryPoint {
                 int y = cell.getRowIndex() - firstSudokuRow;
                 if (y >= 0 && y < 9) {
                     convertTableToDataEntry();
-                    int x = cell.getCellIndex();
-                    final TextBox newField2 = gridFields[x][y];
-                    newField2.setFocus(true);
-                    DeferredCommand.addCommand(new Command() {
-                        public void execute() {
-                            newField2.selectAll();
-                        }
-                    });
+                    selectCell(cell.getCellIndex(), y);
                 }
             }
         };
@@ -146,6 +157,8 @@ public class SudokuPanelController implements EntryPoint {
             table.getRowFormatter().addStyleName(row, "sudokurow");
             for (int x = 0; x < 9; x++) {
                 gridFields[x][y] = new TextBox();
+                gridFields[x][y].setStylePrimaryName("number");
+                gridFields[x][y].setMaxLength(1);
                 gridFields[x][y].addKeyDownHandler(newCellKeyDownHandler(x, y));
                 table.setWidget(row, x, new InlineLabel());  // JIT expand table if necessary, so that setStyle(row,x) doesn't throw
                 if (x%3==0) table.getCellFormatter().setStylePrimaryName(row, x, "leftcol");
@@ -169,6 +182,9 @@ public class SudokuPanelController implements EntryPoint {
     }
 
     protected void convertTableToDataEntry() {
+//        // IE hack: on the click event, if we swap in the data (that's already swapped in), text field loses focus
+//        if (calculateButtonContainer.getVisibleWidget() == CalculateContainerState.calculate.ordinal()) return;
+
         calculateButtonContainer.showWidget(CalculateContainerState.calculate.ordinal());
         messageContainer.setWidget(new InlineLabel());
         for (int y = 0; y < 9; y++) 
@@ -247,7 +263,8 @@ public class SudokuPanelController implements EntryPoint {
             }
         }
 
-        Result result = new SudokuSolver().setTimeoutInMilliseconds(250).solve(board);
+        int timeoutMillis = ((SudokuConfig) GWT.create(SudokuConfig.class)).getTimeoutMillis();
+        Result result = new SudokuSolver().setTimeoutInMilliseconds(timeoutMillis).solve(board);
         String msg;
         MessageType msgType;
         switch (result.type) {
@@ -263,8 +280,13 @@ public class SudokuPanelController implements EntryPoint {
         }
 
         InlineLabel msgLabel = new InlineLabel(msg);
-        msgLabel.setStylePrimaryName(msgType.toString());
-        messageContainer.setWidget(msgLabel);
+        msgLabel.setStylePrimaryName("message");
+        
+        FlowPanel msgPanel = new FlowPanel();
+        msgPanel.setStylePrimaryName(msgType.toString());
+        msgPanel.add(msgType.getImg().createImage());
+        msgPanel.add(msgLabel);
+        messageContainer.setWidget(msgPanel);
     }
 
     void toEditClicked() {
