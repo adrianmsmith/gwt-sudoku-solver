@@ -4,7 +4,7 @@ To set up the IDE:
 - Download and install:
   - Netbeans 6.1 or later
   - Java 6 or later
-  - GWT 1.6 or later
+  - GWT 1.7 
   - GWT4NB
 - In Netbeans: File -> New Project -> Web with existing sources
   - Sources -> "java-src" directory
