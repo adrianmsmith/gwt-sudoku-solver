@@ -61,11 +61,13 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
  tr.sudokurow input.number { font-size: 19pt; font-family: helvetica }
  tr.sudokurow input.number { width: 20px; padding-left:2px; border:0; }
 
- table.sudoku td.submitinfo {  }
- table.sudoku td.submit { height:30px; text-align:right }
  table.sudoku td.statusrow { height:30px; text-align:center; vertical-align:top }
  table.sudoku td.statusrow .message { padding-left: 5px; }
-
+ table.sudoku td.submitinfo {  }
+ table.sudoku td.submit { height:30px; text-align:right }
+ table.sudoku div.spinner { text-right center ; }
+ table.sudoku div.spinner img { margin-top:5px; margin-right: 10px; }
+ 
  td.statusrow .error,
  td.statusrow .success {
     padding-left: 7px;
@@ -91,7 +93,7 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
 
 </style>
 
-<table width="100%""><tr><td align="center">
+<table width="100%"><tr><td align="center">
  <div id="sudokucontainer">
  </div>
 </td></tr></table>

@@ -1,46 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head profile="http://gmpg.org/xfn/11">
 
-<head profile="http://gmpg.org/xfn/11">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Databases and Life &raquo; Sudoku Solver</title>
 
-<meta name="generator" content="WordPress 2.9.2" /> <!-- leave this for stats -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet" href="http://www.databasesandlife.com/wp-content/themes/adrian/style.css" type="text/css" media="screen" />
-<link rel="alternate" type="application/rss+xml" title="Databases and Life RSS Feed" href="http://www.databasesandlife.com/feed/" />
-<link rel="pingback" href="http://www.databasesandlife.com/xmlrpc.php" />
+<title>Databases and Life » Sudoku Solver</title>
 
-<link rel="alternate" type="application/rss+xml" title="Databases and Life &raquo; Sudoku Solver Comments Feed" href="http://www.databasesandlife.com/?p=515/feed/" />
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.databasesandlife.com/xmlrpc.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.databasesandlife.com/wp-includes/wlwmanifest.xml" />
-<link rel='index' title='Databases and Life' href='http://www.databasesandlife.com' />
-<link rel='start' title='Christmas holidays' href='http://www.databasesandlife.com/christmas-holidays/' />
-<link rel='prev' title='Mistake' href='http://www.databasesandlife.com/mistake/' />
-<meta name="generator" content="WordPress 2.9.2" />
-<link rel='canonical' href='http://www.databasesandlife.com/?p=515' />
-</head>
-<body>
+<meta name="generator" content="WordPress 2.9.2"> <!-- leave this for stats -->
+
+<link rel="stylesheet" href="http://www.databasesandlife.com/wp-content/themes/adrian/style.css" type="text/css" media="screen">
+<link rel="alternate" type="application/rss+xml" title="Databases and Life RSS Feed" href="http://www.databasesandlife.com/feed/">
+<link rel="pingback" href="http://www.databasesandlife.com/xmlrpc.php">
+
+<link rel="alternate" type="application/rss+xml" title="Databases and Life » Sudoku Solver Comments Feed" href="http://www.databasesandlife.com/sudoku/feed/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.databasesandlife.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.databasesandlife.com/wp-includes/wlwmanifest.xml">
+<link rel="index" title="Databases and Life" href="http://www.databasesandlife.com">
+<link rel="start" title="Christmas holidays" href="http://www.databasesandlife.com/christmas-holidays/">
+<link rel="prev" title="Mistake" href="http://www.databasesandlife.com/mistake/">
+<meta name="generator" content="WordPress 2.9.2">
+<link rel="canonical" href="http://www.databasesandlife.com/sudoku/">
+</head><body>
 <div id="page">
 
 
 <div id="header">
 	<div id="headerimg">
-  <a href="/"><img style="margin-left:150px" border=0 src="http://www.databasesandlife.com/blog-attachments/databasesandlife-logo.png" alt="databases & life" width=340 height=46></a>
+  <a href="/"><img style="margin-left: 150px;" src="http://www.databasesandlife.com/blog-attachments/databasesandlife-logo.png" alt="databases &amp; life" border="0" width="340" height="46"></a>
+
 	</div>
 </div>
-<hr />
+<hr>
 
 	<div id="content" class="widecolumn">
 
 
 		<div class="navigation">
-			<div class="alignleft">&laquo; <a href="http://www.databasesandlife.com/mistake/" rel="prev">Mistake</a></div>
+			<div class="alignleft">« <a href="http://www.databasesandlife.com/mistake/" rel="prev">Mistake</a></div>
 			<div class="alignright"></div>
 		</div>
 
-<script language=javascript>
+<script language="javascript">
 if (navigator.appName == 'Microsoft Internet Explorer') {
   document.write("<br><br>");
 }
@@ -48,163 +48,94 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
 
 
 		<div class="post" id="post-515">
-			<h2><a href="http://www.databasesandlife.com/?p=515" rel="bookmark" title="Permanent Link: Sudoku Solver">Sudoku Solver</a></h2>
+			<h2><a href="http://www.databasesandlife.com/sudoku/" rel="bookmark" title="Permanent Link: Sudoku Solver">Sudoku Solver</a></h2>
 
 			<div class="entry">
-
-
-
-
-
-
-
-
-
-<style>
- table.sudoku { margin-left: 175px; empty-cells: show; border-collapse: collapse; }
+				<style>
+ div#sudokucontainer {  height:460px; text-align:center; }
+ table.sudoku { empty-cells: show; border-collapse: collapse;  margin-left: auto; margin-right: auto; }
+ table.sudoku div { font-size: 10pt }
  tr.sudokurow td { text-align:center; border: 1px solid #CCC; }
  tr.sudokurow td.leftcol { border-left: 3px solid black;  }
  tr.sudokurow td.rightcol { border-right: 3px solid black;  }
  tr.sudokurow.start td { border-top: 3px solid black;  }
  tr.sudokurow.end td { border-bottom: 3px solid black;  }
-
- tr.sudokurow td { width: 35px; height: 35px; }
- tr.sudokurow span.result { color: #80CC80; }
+ tr.sudokurow td { width: 40px; height: 40px; }
+ tr.sudokurow span.result { color: #AAA; }
  tr.sudokurow span.result,
  tr.sudokurow span.userentered,
- tr.sudokurow input[type=text] { font-size: 19pt; font-family: helvetica }
- tr.sudokurow input[type=text] { width: 20px;  border:0;; }
-
- table.sudoku td.submitinfo {  }
- table.sudoku td.submit { text-align:right }
- table.sudoku td.statusrow { text-align:center; padding-bottom: 10px; }
-
+ tr.sudokurow input.number { font-size: 19pt; font-family: helvetica }
+ tr.sudokurow input.number { width: 20px; padding-left:2px; border:0; }
+ table.sudoku td.submitinfo { text-align:left; }
+ table.sudoku td.submit { height:30px; text-align:right }
+ table.sudoku td.statusrow { height:30px; text-align:center; vertical-align:top }
+ table.sudoku td.statusrow .message { padding-left: 5px; }
  td.statusrow .error,
-  td.statusrow .success,
-  td.statusrow .empty {
-     margin-left: 10px;
-     padding-left: 25px;
-     padding-right: 10px;
-     background-repeat:no-repeat;
-     background-position: 3px 50%;
-     overflow: hidden;
-     border: solid 1px white;
-  }
-
+ td.statusrow .success {
+    padding-left: 7px;
+    padding-right: 7px;
+    display: inline;
+    overflow: hidden;
+ }
  td.statusrow .error {
     color: #800;
     background-color: #FCC;
-    background-image:url('http://www.databasesandlife.com/t/sunrise-error-icon.png');
     border: solid 1px red ;
  }
-
  td.statusrow .success {
     color: #080;
     background-color: #EFE;
-    background-image:url('http://www.databasesandlife.com/t/sunrise-success-icon.png');
     border: solid 1px green ;
  }
-
 </style>
+<table width="100%">
 
-<table class=sudoku>
- <tr>
-  <td colspan=9 class="empty">
-   <span class=error>Calculation took too long, aborting</span>
-   <!-- No solutions found -->
-   <!-- Multiple solutions found -->
-   <!-- Unique solution found ? -->
-  </td>
- </tr>
+<tbody><tr>
+<td align="center">
+<div id="sudokucontainer">
+ <table class="sudoku">
+  <colgroup><col></colgroup>
+  <tbody>
+  <tr><td class="statusrow" colspan="9"><div><span class="gwt-InlineLabel"></span></div></td></tr>
 
- <tr class="sudokurow start">
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
- <tr class=sudokurow>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
- <tr class=sudokurow>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
+  <tr class="start sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="start sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="start sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr><tr class="end sudokurow"><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="leftcol"><input maxlength="1" class="number" tabindex="0" type="text"></td><td><input maxlength="1" class="number" tabindex="0" type="text"></td><td class="rightcol"><input maxlength="1" class="number" tabindex="0" type="text"></td></tr>
 
- <tr class="sudokurow start">
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
- <tr class=sudokurow>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol><input type=text value=7></td> <td></td> <td class=rightcol></td>
- </tr>
- <tr class=sudokurow>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol><span class=result>4</span></td> <td></td> <td></td>
-  <td class=leftcol><span class=userentered>9</span></td> <td></td> <td class=rightcol></td>
- </tr>
+  <tr>
+    <td class="submitinfo" colspan="6"><div><a href="#" class="gwt-InlineHyperlink">Clear grid</a>
+      <span class="gwt-InlineLabel"> | </span>
+      <a href="#" class="gwt-InlineHyperlink">Load example</a></div></td>
+    <td class="submit" colspan="3"><div><div style="width: 100%; height: 100%; padding: 0px; margin: 0px;">
+      <img src="spinner.gif" style="margin-bottom:-3px">
+      <button style="height: 100%;" class="gwt-Button" type="button" tabindex="0" disabled=true>Calculate</button>
+      </div>
+      <div style="width: 100%; height: 100%; padding: 0px; margin: 0px; display: none;"><a style="width: 100%; height: 100%; display: none;" href="#" class="gwt-InlineHyperlink">« Edit again</a></div></div></td>
+  </tr></tbody></table></div>
+</td>
+</tr>
+</tbody></table>
+<p>The above is a Sudoku solver I wrote in Java a while back. Here it is running in the browser. The Java has been converted to in-browser Javascript by Google Web Toolkit.</p>
+<p>Please feel free to type in the hardest Sudokus you can find anywhere, and let me know if it can solve them, I haven’t found any it can’t yet.</p>
 
- <tr class="sudokurow start">
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
- <tr class=sudokurow>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
- <tr class="sudokurow end">
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td></td>
-  <td class=leftcol></td> <td></td> <td class=rightcol></td>
- </tr>
+<p>I assume the in-page Javascript will not work in RSS readers, email notifications, etc. If that’s the case, click here to get to the <a href="http://www.databasesandlife.com/sudoku">original Sudoku solver page</a> on my blog.</p>
+<p>The algorithm works by backtracking, i.e. simply going through all squares from top-left to bottom-right, and finding the set of “candidate numbers” for that square (i.e. which numbers are not already used on that row, column or 3×3 block). The first candidate number is “applied” by placed it into the square, and the algorithm moves to the next square. If there is a square where the set of candidate numbers is empty (i.e. no number would work, given the candidates applied in previous squares) then the system returns to the previous square and tries the next candidate for that square. Once the system has gone “beyond” the bottom-right square, then the set of applied candidates consitutes a solution. However, backtracking continues, if the system reaches beyond the bottom-right square again, then the previously found solution<br>
+was not unique, and the algorithm terminates. Once the system has backtracked back to the start, if a single solution was found then it is a “unique solution” (success case), otherwise if there are no solutions then the Sudoku is unsolvable.</p>
+<p>By the way, Internet Explorer really isn’t that fast; I appreciate that is well-known to anyone who’s ever read Google Chrome marketing material! But the Sudoku <a href="http://z.about.com/d/puzzles/1/0/l/e/1/sudokux103.gif">here</a> takes 708ms to solve on IE8, 334ms on Firefox 3.6, about 100ms on Safari 4 and Opera 10, and 49ms on Chrome 4, on this 2.3GHz/core Intel Windows Vista computer.</p>
+<p><a href="/blog-attachments/20100515-com.databasesandlife.sudoku.Sudoku/databasesandlife-sudoku-solver-source.zip">Download the source here</a>.<br>
 
- <tr>
-  <td colspan=6 class=submitinfo>
-    <a href=#>Clear grid</a> |
-    <a href=#>Load example</a>
-  </td>
-  <td colspan=3 class=submit>
-   <input type=submit value="Calculate">
-  </td>
- </tr>
+<script language="javascript" src="/blog-attachments/20100515-com.databasesandlife.sudoku.Sudoku/com.databasesandlife.sudoku.Sudoku.nocache.js"></script><script defer="defer">com_databasesandlife_sudoku_Sudoku.onInjectionDone('com.databasesandlife.sudoku.Sudoku')</script></p>
 
-</table>
-
-</p>
-
-
-
-
-
-
-
-
-
-
-
-
-				<p>The above is a Sudoku solver I wrote in Java a while back.
-Here it is running in the browser. The Java has been converted to in-browser Javascript by Google Web Toolkit.</p>
-
-<p>P.S. Not sure if this will work in RSS readers, email notifications, etc., I assume not! If not, click through to the original post here.</p>
 
 				<p class="postmetadata alt">
 					<small>
 						This entry was posted
-												on Friday, May 14th, 2010 at 1:46 pm						and is filed under <a href="http://www.databasesandlife.com/category/uncategorized/" title="View all posts in Uncategorized" rel="category tag">Uncategorized</a>.
+												on Saturday, May 15th, 2010 at 3:45 pm						and is filed under <a href="http://www.databasesandlife.com/category/uncategorized/" title="View all posts in Uncategorized" rel="category tag">Uncategorized</a>.
 						You can <a href="/subscribe-via-email-or-rss">subscribe</a> to Adrian's blog.
-						You can follow any responses to this entry through the <a href='http://www.databasesandlife.com/?p=515/feed/'>RSS 2.0</a> feed.
+						You can follow any responses to this entry through the <a href="http://www.databasesandlife.com/sudoku/feed/">RSS 2.0</a> feed.
 
-													You can <a href="#respond">leave a response</a>, or <a href="http://www.databasesandlife.com/?p=515/trackback/" rel="trackback">trackback</a> from your own site.
+													You can <a href="#respond">leave a response</a>, or <a href="http://www.databasesandlife.com/sudoku/trackback/" rel="trackback">trackback</a> from your own site.
 
 						<a class="post-edit-link" href="http://www.databasesandlife.com/wp-admin/post.php?action=edit&amp;post=515" title="Edit post">Edit this entry.</a>
+
 					</small>
 				</p>
 
@@ -214,8 +145,23 @@ Here it is running in the browser. The Java has been converted to in-browser Jav
 
 <!-- You can start editing here. -->
 
+	<h3 id="comments">One Response to “Sudoku Solver”</h3>
 
-			<!-- If comments are open, but there are no comments. -->
+	<ol class="commentlist">
+
+
+		<li class="alt" id="comment-12131">
+			<cite>Your wife</cite> Says:
+
+			<small class="commentmetadata"><a href="#comment-12131" title="">May 15th, 2010 at 5:23 pm</a> &nbsp;&nbsp;<a class="comment-edit-link" href="http://www.databasesandlife.com/wp-admin/comment.php?action=editcomment&amp;c=12131" title="Edit comment">edit</a></small>
+
+			<p>Ha! I just typed in the last sudoku in my sudoku magazine (presumably the most difficult one), pressed the “calculate” button. But it shows “This is not a reasonable sudoku” which can’t be true, because I’m confident that I can solve it. ;)</p>
+
+		</li>
+
+
+
+	</ol>
 
 
 
@@ -226,18 +172,19 @@ Here it is running in the browser. The Java has been converted to in-browser Jav
 <form action="http://www.databasesandlife.com/wp-comments-post.php" method="post" id="commentform">
 
 
-<p>Logged in as <a href="http://www.databasesandlife.com/wp-admin/profile.php">adrian</a>. <a href="http://www.databasesandlife.com/wp-login.php?action=logout" title="Log out of this account">Logout &raquo;</a></p>
+<p>Logged in as <a href="http://www.databasesandlife.com/wp-admin/profile.php">adrian</a>. <a href="http://www.databasesandlife.com/wp-login.php?action=logout" title="Log out of this account">Logout »</a></p>
 
 
-<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>
+<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>
+
 <p><small><strong>For inserting HTML or XML</strong> please remember to use &amp;lt; instead of &lt;</small></p>
 
 <p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
 
-<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
-<input type="hidden" name="comment_post_ID" value="515" />
+<p><input name="submit" id="submit" tabindex="5" value="Submit Comment" type="submit">
+<input name="comment_post_ID" value="515" type="hidden">
 </p>
-<input type="hidden" id="_wp_unfiltered_html_comment" name="_wp_unfiltered_html_comment" value="a07ccc2a8b" />
+<input id="_wp_unfiltered_html_comment" name="_wp_unfiltered_html_comment" value="d56e947fd3" type="hidden">
 </form>
 
 
@@ -246,20 +193,20 @@ Here it is running in the browser. The Java has been converted to in-browser Jav
 	</div>
 
 
-<hr />
+<hr>
 <div id="footer">
 <!-- If you'd like to support WordPress, having the "powered by" link somewhere on your blog is the best way; it's our only promotion or advertising. -->
 	<p>
 		Databases and Life is proudly powered by
 		<a href="http://wordpress.org/">WordPress</a>
-		<br /><a href="http://www.databasesandlife.com/feed/">Entries (RSS)</a>
+		<br><a href="http://www.databasesandlife.com/feed/">Entries (RSS)</a>
 		and <a href="http://www.databasesandlife.com/comments/feed/">Comments (RSS)</a>.
-		<!-- 16 queries. 0.176 seconds. -->
+		<!-- 16 queries. 0.182 seconds. -->
+
 	</p>
 </div>
 </div>
 
 <!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubrick/ -->
 
-		</body>
-</html>
+		<iframe tabindex="-1" style="position: absolute; width: 0pt; height: 0pt; border: medium none;" id="com.databasesandlife.sudoku.Sudoku" src="javascript:''"></iframe></body></html>

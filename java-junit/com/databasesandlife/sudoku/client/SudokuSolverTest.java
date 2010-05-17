@@ -18,16 +18,17 @@ public class SudokuSolverTest extends TestCase {
     /** @return number of seconds to perform calculation */
     protected <T extends SudokuSolver> double time(int[] board, Class<T> cl) {
         try {
+            long secInNanos = 1000 * 1000 * 1000;
             long start = 0;
             long end;
             int iterations = -1;
             do {
-                cl.getConstructor(int.class).newInstance(1).solve(board);
+                cl.getConstructor(int[].class).newInstance(board).continueSolving(100000);
                 end = System.nanoTime();
                 if (start == 0) start = System.nanoTime();
                 iterations ++ ;
-            } while (end < start + 1000000000);
-            return ((double) end - start) / 1000000000 / iterations;
+            } while (end < start + 10*secInNanos);
+            return ((double) end - start) / secInNanos / iterations;
         }
         catch (NoSuchMethodException e) { throw new RuntimeException(e); }
         catch (InstantiationException e) { throw new RuntimeException(e); }
@@ -63,8 +64,27 @@ public class SudokuSolverTest extends TestCase {
             1, 4, 8,  3, 2, 9,  7, 6, 5
         };
         
-        SudokuSolver.Result r = new SudokuSolver().setTimeoutInMilliseconds(2000).solve(board);
+        SudokuSolver.Result r = new SudokuSolver(board).continueSolving(10000);
         assertEquals(SudokuSolver.Result.Type.UNIQUE, r.type);
         assertEquals(result, r.board);
+    }
+
+    public void testSpeed() {
+        int[] board = new int[] {
+            8, 6, 0,  0, 2, 0,  0, 0, 0,
+            0, 0, 0,  7, 0, 0,  0, 5, 9,
+            0, 0, 0,  0, 0, 0,  0, 0, 0,
+
+            0, 0, 0,  0, 6, 0,  8, 0, 0,
+            0, 4, 0,  0, 0, 0,  0, 0, 0,
+            0, 0, 5,  3, 0, 0,  0, 0, 7,
+
+            0, 0, 0,  0, 0, 0,  0, 0, 0,
+            0, 2, 0,  0, 0, 0,  6, 0, 0,
+            0, 0, 7,  5, 0, 9,  0, 0, 0
+        };
+
+        double seconds = time(board, SudokuSolver.class);
+        System.out.println("Hard soduoku : " + seconds + "s");
     }
  }
