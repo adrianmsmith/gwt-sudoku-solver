@@ -51,6 +51,26 @@ import com.google.gwt.user.client.ui.Widget;
  *
  * @author Adrian Smith
  */
+
+
+// Test cases:
+//   - Edit mode:
+//     - Clear works
+//     - Load example works
+//     - Calculate with no data works (-> mult. results)
+//     - Calc the example works
+//     - Impossible works (-> error)
+//     - Cursor keys work, Enter key works
+//   - In results mode (one solution found)
+//     - back to edit mode works
+//     - Clear & Load example works (back to edit mode)
+//     - Click on board, back to edit mode
+//   - During long calculation:
+//     - Clear & Load example works (back to edit mode)
+//     - Click on board, back to edit mode
+//     - Success? -> Resutls page
+//     - Error? -> Displayed & back to edit page
+
 public class SudokuPanelController implements EntryPoint {
 
     enum CalculateContainerState { calculate, inProgress, editAgain };
@@ -213,15 +233,16 @@ public class SudokuPanelController implements EntryPoint {
         String msg;
         MessageType msgType;
         switch (result.type) {
-            case ERR_NONE:      msgType = MessageType.error; msg = "No solutions found"; break;
-            case ERR_TIMEOUT:   msgType = MessageType.error; msg = "This is not a reasonable Sudoku"; break;
+            case ERR_NONE:     msgType = MessageType.error; msg = "No solutions found"; break;
+            case ERR_TIMEOUT:  msgType = MessageType.error; msg = "This is not a reasonable Sudoku"; break;
             case ERR_MULTIPLE: msgType = MessageType.error; msg = "Multiple solutions found"; break;
-            case UNIQUE:
-                msgType = MessageType.success;
-                msg = "Unique solution found";
-                convertTableToResults(result.board, fromUser);
-                break;
+            case UNIQUE:       msgType = MessageType.success; msg = "Unique solution found"; break;
             default: throw new RuntimeException("unreachable");
+        }
+
+        switch (msgType) {
+            case error: convertTableToDataEntry(); break;
+            case success: convertTableToResults(result.board, fromUser); break;
         }
 
         InlineLabel msgLabel = new InlineLabel(msg);
