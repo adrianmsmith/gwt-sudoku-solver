@@ -1,7 +1,7 @@
 Introduction
 ============
 
-This is the source to Databases & Life Sudoku Solver.
+This is the source to Databases & Life Sudoku Solver, created in 2010.
 
 The running version can be found here:
 
